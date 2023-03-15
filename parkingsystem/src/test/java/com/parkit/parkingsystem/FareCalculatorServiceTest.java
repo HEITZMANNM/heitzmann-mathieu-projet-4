@@ -28,6 +28,38 @@ public class FareCalculatorServiceTest {
         ticket = new Ticket();
     }
 
+     @Test
+
+    public void calculateFarCarWithLessThanHalfHourParkingTime(){
+
+        Date inTime = new Date();
+        inTime.setTime(System.currentTimeMillis() - (20 * 60 * 1000));
+        Date outTime = new Date();
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
+
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(ticket.getPrice(), 0);
+    }
+
+    @Test
+
+    public void calculateFarBikeWithLessThanHalfHourParkingTime(){
+
+        Date inTime = new Date();
+        inTime.setTime(System.currentTimeMillis() - (20 * 60 * 1000));
+        Date outTime = new Date();
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
+
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(ticket.getPrice(), 0);
+    }
+
     @Test
     public void calculateFareCar(){
         Date inTime = new Date();
