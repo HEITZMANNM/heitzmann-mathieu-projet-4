@@ -17,16 +17,24 @@ public class FareCalculatorService {
         double duration = (outHour - inHour)/60000;//make the difference between the date of entrance and exit in minutes
         double durationInDecimal = duration/60;//convert duration in hour's decimal
 
-        switch (ticket.getParkingSpot().getParkingType()){
-            case CAR: {
-                ticket.setPrice(durationInDecimal * Fare.CAR_RATE_PER_HOUR);
-                break;
+        if(duration<30)
+        {
+            ticket.setPrice(0);
+        }
+        else 
+        {
+            switch (ticket.getParkingSpot().getParkingType()) {
+                case CAR: {
+                    ticket.setPrice(durationInDecimal * Fare.CAR_RATE_PER_HOUR);
+                    break;
+                }
+                case BIKE: {
+                    ticket.setPrice(durationInDecimal * Fare.BIKE_RATE_PER_HOUR);
+                    break;
+                }
+                default:
+                    throw new IllegalArgumentException("Unkown Parking Type");
             }
-            case BIKE: {
-                ticket.setPrice(durationInDecimal * Fare.BIKE_RATE_PER_HOUR);
-                break;
-            }
-            default: throw new IllegalArgumentException("Unkown Parking Type");
         }
     }
 }
