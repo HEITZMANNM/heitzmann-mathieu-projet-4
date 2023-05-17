@@ -5,7 +5,7 @@ import com.parkit.parkingsystem.model.Ticket;
 
 <span class="fc" id="L6">public class FareCalculatorService {</span>
 
-     public void calculateFare(Ticket ticket, boolean customerLoyalty){
+    public void calculateFare(Ticket ticket, boolean customerLoyalty){
 //    public void calculateFare(Ticket ticket){
 <span class="pc bpc" id="L10" title="1 of 4 branches missed.">        if( (ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime())) ){</span>
 <span class="fc" id="L11">            throw new IllegalArgumentException(&quot;Out time provided is incorrect:&quot;+ticket.getOutTime().toString());</span>
@@ -26,22 +26,22 @@ import com.parkit.parkingsystem.model.Ticket;
         }
 <span class="fc bfc" id="L27" title="All 2 branches covered.">        else if(customerLoyalty == true)</span>
         {
-<span class="pc bpc" id="L29" title="1 of 3 branches missed.">        switch (ticket.getParkingSpot().getParkingType()) {</span>
-            case CAR: {
-<span class="fc" id="L31">         double priceBeforeReduction = durationInDecimal * Fare.CAR_RATE_PER_HOUR;</span>
-<span class="fc" id="L32">        double reduction = priceBeforeReduction*0.05;</span>
-<span class="fc" id="L33">                ticket.setPrice(priceBeforeReduction - reduction);</span>
-<span class="fc" id="L34">                break;</span>
+<span class="pc bpc" id="L29" title="1 of 3 branches missed.">            switch (ticket.getParkingSpot().getParkingType()) {</span>
+                case CAR: {
+<span class="fc" id="L31">                    double priceBeforeReduction = durationInDecimal * Fare.CAR_RATE_PER_HOUR;</span>
+<span class="fc" id="L32">                    double reduction = priceBeforeReduction*0.05;</span>
+<span class="fc" id="L33">                    ticket.setPrice(priceBeforeReduction - reduction);</span>
+<span class="fc" id="L34">                    break;</span>
+                }
+                case BIKE: {
+<span class="fc" id="L37">                    double priceBeforeReduction = durationInDecimal * Fare.BIKE_RATE_PER_HOUR;</span>
+<span class="fc" id="L38">                    double reduction = priceBeforeReduction*0.05;</span>
+<span class="fc" id="L39">                    ticket.setPrice(priceBeforeReduction - reduction);</span>
+<span class="fc" id="L40">                    break;</span>
+                }
+                default:
+<span class="nc" id="L43">                    throw new IllegalArgumentException(&quot;Unkown Parking Type&quot;);</span>
             }
-            case BIKE: {
-<span class="fc" id="L37">         double priceBeforeReduction = durationInDecimal * Fare.BIKE_RATE_PER_HOUR;</span>
-<span class="fc" id="L38">        double reduction = priceBeforeReduction*0.05;</span>
-<span class="fc" id="L39">             ticket.setPrice(priceBeforeReduction - reduction);</span>
-<span class="fc" id="L40">                break;</span>
-            }
-            default:
-<span class="nc" id="L43">                throw new IllegalArgumentException(&quot;Unkown Parking Type&quot;);</span>
-        }
         }
         else
         {
