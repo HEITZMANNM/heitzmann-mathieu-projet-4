@@ -71,7 +71,7 @@ public class ParkingDataBaseIT {
 
     }
 
-@Test
+    @Test
     public void testParkingACar(){
 
         //GIVEN...
@@ -81,13 +81,13 @@ public class ParkingDataBaseIT {
         parkingService.processIncomingVehicle();
 
 
-        final Ticket expectedSavedTicket = new Ticket();
-        expectedSavedTicket.setVehicleRegNumber("ABCDEF");//create a ticket with the same car reg number than which expected register in DB
+//        final Ticket expectedSavedTicket = new Ticket();
+//        expectedSavedTicket.setVehicleRegNumber("ABCDEF");//create a ticket with the same car reg number than which expected register in DB
 
         boolean availabilityOfParkingSpotOfIncomingCar = ticketDAO.getTicket("ABCDEF").getParkingSpot().isAvailable();
 
         //THEN
-        assertEquals(expectedSavedTicket.getVehicleRegNumber(), ticketDAO.getTicket("ABCDEF").getVehicleRegNumber());
+        assertEquals("ABCDEF", ticketDAO.getTicket("ABCDEF").getVehicleRegNumber());
         assertFalse(availabilityOfParkingSpotOfIncomingCar);
 
     }
@@ -125,9 +125,6 @@ public class ParkingDataBaseIT {
         //THEN
         assertNotNull(outDateExpected);
         assertNotEquals(fareExpected, 0);//check if the price of ticket was claculated so that the out Date was registered.
-
-
-
 
     }
 

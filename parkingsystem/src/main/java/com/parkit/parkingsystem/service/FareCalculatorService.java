@@ -5,7 +5,7 @@ import com.parkit.parkingsystem.model.Ticket;
 
 public class FareCalculatorService {
 
-     public void calculateFare(Ticket ticket, boolean customerLoyalty){
+    public void calculateFare(Ticket ticket, boolean customerLoyalty){
 //    public void calculateFare(Ticket ticket){
         if( (ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime())) ){
             throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
@@ -26,22 +26,22 @@ public class FareCalculatorService {
         }
         else if(customerLoyalty == true)
         {
-        switch (ticket.getParkingSpot().getParkingType()) {
-            case CAR: {
-         double priceBeforeReduction = durationInDecimal * Fare.CAR_RATE_PER_HOUR;
-        double reduction = priceBeforeReduction*0.05;
-                ticket.setPrice(priceBeforeReduction - reduction);
-                break;
+            switch (ticket.getParkingSpot().getParkingType()) {
+                case CAR: {
+                    double priceBeforeReduction = durationInDecimal * Fare.CAR_RATE_PER_HOUR;
+                    double reduction = priceBeforeReduction*0.05;
+                    ticket.setPrice(priceBeforeReduction - reduction);
+                    break;
+                }
+                case BIKE: {
+                    double priceBeforeReduction = durationInDecimal * Fare.BIKE_RATE_PER_HOUR;
+                    double reduction = priceBeforeReduction*0.05;
+                    ticket.setPrice(priceBeforeReduction - reduction);
+                    break;
+                }
+                default:
+                    throw new IllegalArgumentException("Unkown Parking Type");
             }
-            case BIKE: {
-         double priceBeforeReduction = durationInDecimal * Fare.BIKE_RATE_PER_HOUR;
-        double reduction = priceBeforeReduction*0.05;
-             ticket.setPrice(priceBeforeReduction - reduction);
-                break;
-            }
-            default:
-                throw new IllegalArgumentException("Unkown Parking Type");
-        }
         }
         else
         {

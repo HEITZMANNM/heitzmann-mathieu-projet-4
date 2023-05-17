@@ -66,12 +66,12 @@ public class TicketDOATest {
 
     @Test
     public void verifyIfCustomerIsLoyalWithTenTicketsByMonth(){
-    //GIVEN
+        //GIVEN
         ticketDAO = new TicketDAO();
         List<Ticket> ListsOfTicketsByVehiclRegisterWithMoreThanTenDates = getLoyalCustomerList();
 
-    //WHEN
-       boolean actualResult =  ticketDAO.controlIfCustomerIsLoyal(ListsOfTicketsByVehiclRegisterWithMoreThanTenDates);
+        //WHEN
+        boolean actualResult =  ticketDAO.controlIfCustomerIsLoyal(ListsOfTicketsByVehiclRegisterWithMoreThanTenDates);
 
         //THEN
         assertEquals(actualResult, true);
@@ -81,7 +81,7 @@ public class TicketDOATest {
     public void verifyIfCustomerIsNonLoyalWithLessThanTenTicketsByMonth(){
         //GIVEN
         ticketDAO = new TicketDAO();
-       List<Ticket> ListsOfTicketsByVehiclRegisterWithLessThanTenDates = getNonLoyalCustomerList();
+        List<Ticket> ListsOfTicketsByVehiclRegisterWithLessThanTenDates = getNonLoyalCustomerList();
 
         //WHEN
         boolean actualResult = ticketDAO.controlIfCustomerIsLoyal(ListsOfTicketsByVehiclRegisterWithLessThanTenDates);

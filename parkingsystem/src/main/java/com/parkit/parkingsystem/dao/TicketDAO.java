@@ -83,7 +83,7 @@ public class TicketDAO {
 
         try {
             con = dataBaseConfig.getConnection();
-            PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKET);
+            PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKET_LESS_THAN_30_DAYS);
             //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
             ps.setString(1,vehicleRegNumber);
             ResultSet rs = ps.executeQuery();
@@ -124,7 +124,7 @@ public class TicketDAO {
         return result;
     }
 
-//the method updateTicket() was modified to add the up date of the inTime1&
+    //the method updateTicket() was modified to add the up date of the inTime1&
     public boolean updateTicket(Ticket ticket) {
         Connection con = null;
         try {
